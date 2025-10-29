@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Upload a picture</title>
+    <style>
+      body { font-family: system-ui, sans-serif; margin: 2rem; }
+      form { border: 1px solid #ddd; padding: 1rem; border-radius: .5rem; max-width: 420px; }
+      button { padding: .6rem 1rem; }
+    </style>
+  </head>
+  <body>
+    <h1>Upload a picture</h1>
+    <form method="post" action="/upload" enctype="multipart/form-data">
+      <p><input type="file" name="file" accept="image/*" required></p>
+      <button type="submit">Upload</button>
+      <p style="font-size:.9rem;color:#666">Max 30 MB; JPEG/PNG/WebP.</p>
+    </form>
+  </body>
+</html>

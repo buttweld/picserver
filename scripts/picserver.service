@@ -1,0 +1,19 @@
+[Unit]
+Description=Picture Upload & Processing Server (FastAPI)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=kursad
+Group=kursad
+WorkingDirectory=/home/kursad/picserver
+Environment=PATH=/home/kursad/picserver/.venv/bin:/usr/bin:/bin
+ExecStart=/home/kursad/picserver/.venv/bin/uvicorn app.main:app --host 0.0.0.0 --port 8000 --loop asyncio --http h11 --workers 1
+Restart=on-failure
+RestartSec=3
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

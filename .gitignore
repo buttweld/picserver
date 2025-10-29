@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pkl
+
+# Virtual env
+.venv/
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+
+# App runtime artifacts
+app/uploads/
+app/processed/
+*.log
+
+# If you create env files
+.env
+.env.*
