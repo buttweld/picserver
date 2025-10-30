@@ -7,14 +7,53 @@
       img { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: .5rem; }
       .grid { display: grid; gap: 1rem; grid-template-columns: 1fr; }
       @media (min-width: 900px) { .grid { grid-template-columns: 1fr 1fr; } }
+      .btn { display:inline-block; padding:.6rem 1rem; border:1px solid #ddd; border-radius:.5rem; text-decoration:none; cursor:pointer; }
+      .muted { color:#666; font-size:.95rem; }
+      #status { margin-top: .75rem; }
+      .grid { display:grid; gap:1rem; grid-template-columns:1fr; }
+      @media (min-width:900px){ .grid { grid-template-columns:1fr 1fr; } }
+      .grid img { height: 320px; width: auto; display:block; }
     </style>
   </head>
   <body>
-    <h1>Done!</h1>
+    <h1>Picture uploaded!</h1>
     <div class="grid">
-      <div><h2>Original</h2><img src="{{ original_url }}" alt="original"></div>
-      <div><h2>Processed</h2><img src="{{ processed_url }}" alt="processed"></div>
+      <div>
+        <h2>Original</h2>
+        <img src="{{ original_url }}" alt="original">
+      </div>
+      <div>
+        <h2>Processed</h2>
+        <img src="{{ processed_url }}" alt="processed (BMP preview)">
+      </div>
     </div>
+    <p><button id="updateBtn" class="btn">Update Display</button></p>
+    <div id="status" class="muted"></div>
     <p><a href="/">Upload another</a></p>
+
+    <script>
+      const btn = document.getElementById('updateBtn');
+      const statusEl = document.getElementById('status');
+
+      async function updateDisplay() {
+        btn.disabled = true;
+        statusEl.textContent = 'Updating display...';
+        try {
+          const res = await fetch('/update', { method: 'POST' });
+          const data = await res.json();
+          if (res.ok && data.ok) {
+            statusEl.textContent = '✅ Display updated.';
+          } else {
+            statusEl.textContent = '❌ ' + (data.msg || 'Update failed');
+          }
+        } catch (e) {
+          statusEl.textContent = '❌ Network or server error.';
+        } finally {
+          btn.disabled = false;
+        }
+      }
+
+      btn.addEventListener('click', updateDisplay);
+    </script>
   </body>
 </html>
