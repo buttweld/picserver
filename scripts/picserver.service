@@ -15,5 +15,10 @@ RestartSec=3
 StandardOutput=journal
 StandardError=journal
 
+Environment="WEATHER_API_KEY=<OPEN_WEATHER_API_KEY_HERE>"
+Environment="WEATHER_LAT=39.889932"
+Environment="WEATHER_LON=32.780696"
+Environment="WEATHER_PERIOD_SEC=60"
+
 [Install]
 WantedBy=multi-user.target
