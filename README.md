@@ -76,6 +76,9 @@ deactivate
 ## Automatic Startup on Boot
 Setup a system service in order for the server to run on start-up.
 Copy scripts/picserver.service to /etc/systemd/system/
+
+Note: modify contents to match your user name. Optionally add an
+OpenWeatherMap API key and update coordinates.
 ```bash
 sudo cp ~/picserver/scripts/picserver.service /etc/systemd/system/
 ```
